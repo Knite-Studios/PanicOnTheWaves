@@ -13,7 +13,7 @@ namespace Editor
     /// Static class that loads the game manager into the scene.
     /// </summary>
     [InitializeOnLoad]
-    internal static class GameManagerLoader
+    static class GameManagerLoader
     {
         public static Action OnCreation;
 
