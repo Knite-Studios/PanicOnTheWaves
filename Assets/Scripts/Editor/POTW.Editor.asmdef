@@ -1,0 +1,18 @@
+{
+    "name": "POTW.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e96fcae7b1d6c1b40af55729f0d28d0a"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
