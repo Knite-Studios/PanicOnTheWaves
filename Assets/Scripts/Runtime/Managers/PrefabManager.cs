@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common;
+using Common.Attributes;
 using Extensions;
 using Interfaces;
 using Scriptable;
@@ -9,6 +10,7 @@ using UnityEngine;
 
 namespace Managers
 {
+    [InitializeSingleton]
     public class PrefabManager : MonoSingleton<PrefabManager>
     {
         [SerializeField] private List<Prefabs> allPrefabs;
