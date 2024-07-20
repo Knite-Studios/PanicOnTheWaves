@@ -35,6 +35,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HypeTest"",
+                    ""type"": ""Button"",
+                    ""id"": ""14e3ac40-6832-4794-9c6b-30791108c218"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""Combo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc3885d5-29f5-48fa-9f37-4e2de7f5e161"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HypeTest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         // Controls
         m_Controls = asset.FindActionMap("Controls", throwIfNotFound: true);
         m_Controls_Combo = m_Controls.FindAction("Combo", throwIfNotFound: true);
+        m_Controls_HypeTest = m_Controls.FindAction("HypeTest", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,11 +140,13 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Controls;
     private List<IControlsActions> m_ControlsActionsCallbackInterfaces = new List<IControlsActions>();
     private readonly InputAction m_Controls_Combo;
+    private readonly InputAction m_Controls_HypeTest;
     public struct ControlsActions
     {
         private @Inputs m_Wrapper;
         public ControlsActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Combo => m_Wrapper.m_Controls_Combo;
+        public InputAction @HypeTest => m_Wrapper.m_Controls_HypeTest;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -136,6 +159,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Combo.started += instance.OnCombo;
             @Combo.performed += instance.OnCombo;
             @Combo.canceled += instance.OnCombo;
+            @HypeTest.started += instance.OnHypeTest;
+            @HypeTest.performed += instance.OnHypeTest;
+            @HypeTest.canceled += instance.OnHypeTest;
         }
 
         private void UnregisterCallbacks(IControlsActions instance)
@@ -143,6 +169,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Combo.started -= instance.OnCombo;
             @Combo.performed -= instance.OnCombo;
             @Combo.canceled -= instance.OnCombo;
+            @HypeTest.started -= instance.OnHypeTest;
+            @HypeTest.performed -= instance.OnHypeTest;
+            @HypeTest.canceled -= instance.OnHypeTest;
         }
 
         public void RemoveCallbacks(IControlsActions instance)
@@ -163,5 +192,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     public interface IControlsActions
     {
         void OnCombo(InputAction.CallbackContext context);
+        void OnHypeTest(InputAction.CallbackContext context);
     }
 }

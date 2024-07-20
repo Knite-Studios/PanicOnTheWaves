@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421dfd53857c434689ec9dc436039b6d, type: 3}
   m_Name: GameObjects
   m_EditorClassIdentifier: 
-  prefabs: []
+  prefabs:
+  - type: 1
+    prefab: {fileID: 413174452469809454, guid: 67a1c619129242442abc46388f27b9ec, type: 3}
+    root: Canvas/HypeContainer
+    shouldPool: 0
+    initialPoolSize: 0
+  - type: 2
+    prefab: {fileID: 655249119421321706, guid: 8ebfbb19b76166d40b2103abee5f90a7, type: 3}
+    root: Canvas/HypeContainer/PlayableArea
+    shouldPool: 0
+    initialPoolSize: 0

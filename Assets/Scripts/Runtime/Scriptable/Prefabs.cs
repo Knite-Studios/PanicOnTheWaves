@@ -33,5 +33,7 @@ public struct Prefab
 /// </summary>
 public enum PrefabType
 {
-    None = 0
+    None = 0,
+    Hype = 1,
+    HypeTrigger = 2,
 }

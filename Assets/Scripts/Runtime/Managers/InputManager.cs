@@ -10,6 +10,7 @@ namespace Managers
         private Inputs _inputs;
         
         public static InputAction Combo => Instance._inputs.Controls.Combo;
+        public static InputAction HypeTest => Instance._inputs.Controls.HypeTest;
 
         protected override void Awake()
         {

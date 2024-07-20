@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Common;
 using Common.Attributes;
 using Common.Utils;
@@ -24,6 +25,15 @@ namespace Managers
                          singleton => singleton.GetMethod("Initialize")))
             {
                 method?.Invoke(null, null);
+            }
+        }
+
+        private void Update()
+        {
+            // TODO: Temporary only for prototype.
+            if (InputManager.HypeTest.triggered)
+            {
+                HypeManager.Instance.SpawnHype();
             }
         }
     }
