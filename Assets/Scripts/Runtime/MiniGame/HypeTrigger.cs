@@ -7,7 +7,7 @@ namespace MiniGame
 {
     public class HypeTrigger : MonoBehaviour
     {
-        public Action OnHypeDestroyed;
+        public Action OnHypeTriggerDestroyed;
         
         private void Start()
         {
@@ -34,12 +34,12 @@ namespace MiniGame
         private void OnDestroy()
         {
             // Invoke the event first.
-            OnHypeDestroyed?.Invoke();
+            OnHypeTriggerDestroyed?.Invoke();
             
             // Unsubscribe to all handlers.
-            foreach (var d in OnHypeDestroyed!.GetInvocationList())
+            foreach (var d in OnHypeTriggerDestroyed!.GetInvocationList())
             {
-                OnHypeDestroyed -= (Action) d;
+                OnHypeTriggerDestroyed -= (Action) d;
             }
         }
     }

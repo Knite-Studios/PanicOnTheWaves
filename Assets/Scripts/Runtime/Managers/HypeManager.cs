@@ -23,18 +23,22 @@ namespace Managers
 
             var hypeTrigger = PrefabManager.Create<HypeTrigger>(PrefabType.HypeTrigger);
             _hypeTrigger = hypeTrigger;
-            hypeTrigger.OnHypeDestroyed += () =>
+            hypeTrigger.OnHypeTriggerDestroyed += () =>
             {
-                _hypes.TryPeek(out var curHype);
-                if (curHype && curHype.Target == _hypeTrigger.transform) _hypes.Dequeue();
                 _hypeTrigger = null;
                 _canSpawnHype = true;
             };
 
             var hype = PrefabManager.Create<Hype>(PrefabType.Hype);
             hype.Initialize(hypeTrigger);
-            _hypes.Enqueue(hype);
+            hype.OnHypeDestroyed += () =>
+            {
+                _hypes.TryPeek(out var curHype);
+                if (curHype && curHype.Target == _hypeTrigger.transform && hype == curHype)
+                    _hypes.Dequeue();
+            };
             
+            _hypes.Enqueue(hype);
             _canSpawnHype = false;
         }
 
@@ -43,14 +47,6 @@ namespace Managers
             if (_hypes.Count == 0 || !_hypeTrigger) return;
             
             var hype = _hypes.Dequeue();
-            if (!hype)
-            {
-                // Check the next hype if the target is = to the hype trigger.
-                _hypes.TryPeek(out var nextHype);
-                if (nextHype && nextHype.Target == _hypeTrigger.transform)
-                    hype = _hypes.Dequeue();
-            }
-            
             var distance = Vector3.Distance(hype.transform.position, _hypeTrigger.transform.position);
             Debug.Log($"Distance: {distance}");
             

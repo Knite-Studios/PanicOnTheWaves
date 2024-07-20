@@ -6,6 +6,8 @@ namespace MiniGame
 {
     public class Hype : MonoBehaviour
     {
+        public Action OnHypeDestroyed;
+
         [SerializeField] private float speed = 200.0f;
 
         public Transform Target { get; private set; }
@@ -40,6 +42,18 @@ namespace MiniGame
         //     
         //     Debug.Log("Missed Hypeeeeeeeeeeeeee!");
         // }
+        
+        private void OnDestroy()
+        {
+            // Invoke the event first.
+            OnHypeDestroyed?.Invoke();
+            
+            // Unsubscribe to all handlers.
+            foreach (var d in OnHypeDestroyed!.GetInvocationList())
+            {
+                OnHypeDestroyed -= (Action) d;
+            }
+        }
 
         public void Initialize(HypeTrigger owner)
         {
