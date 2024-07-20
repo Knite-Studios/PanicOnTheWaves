@@ -1,0 +1,34 @@
+{
+    "name": "Inputs",
+    "maps": [
+        {
+            "name": "Controls",
+            "id": "4c87c93a-17e9-44f7-a44c-6ebd1b8aedf5",
+            "actions": [
+                {
+                    "name": "Combo",
+                    "type": "Button",
+                    "id": "a92e9663-92ef-41e0-a1cd-c76df8cb8245",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "215dca6c-70ea-4521-b303-f2b126c46cf6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Combo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

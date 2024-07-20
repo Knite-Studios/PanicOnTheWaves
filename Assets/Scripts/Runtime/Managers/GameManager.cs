@@ -10,11 +10,18 @@ namespace Managers
         protected override void Awake()
         {
             base.Awake();
-            
-            // Initialize other managers.
+
+            InitializeManagers();
+        }
+
+        /// <summary>
+        /// Initialize managers with the InitializeSingleton attribute.
+        /// </summary>
+        private void InitializeManagers()
+        {
             var singletons = Utils.GetTypesFor<InitializeSingleton>();
             foreach (var method in singletons.Select(
-                singleton => singleton.GetMethod("Initialize")))
+                         singleton => singleton.GetMethod("Initialize")))
             {
                 method?.Invoke(null, null);
             }
