@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace World
 {
+    [DefaultExecutionOrder(100)]
     public class GridBehaviour : MonoBehaviour
     {
         [SerializeField] private int rows = 6;
@@ -12,6 +13,8 @@ namespace World
 #if UNITY_EDITOR
         [SerializeField] private bool showGrid = true;
 #endif
+
+        public int Rows => rows;
 
         private Vector3 _cellSize;
         private Cell[,] _grid;
