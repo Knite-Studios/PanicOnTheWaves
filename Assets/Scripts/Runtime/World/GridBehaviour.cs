@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using Managers;
+using UnityEngine;
 
 namespace World
 {
-    public class GridSystem : MonoBehaviour
+    public class GridBehaviour : MonoBehaviour
     {
         [SerializeField] private int rows = 6;
         [SerializeField] private int columns = 10;
@@ -12,10 +14,15 @@ namespace World
 #endif
 
         private Vector3 _cellSize;
+        private Cell[,] _grid;
 
         private void Start()
         {
+            // Add interaction handlers.
+            InputManager.Instance.StartSelectGrid += OnGridSelect;
+            
             CalculateCellSize();
+            CreateGrid();
         }
 
 #if UNITY_EDITOR
@@ -44,10 +51,33 @@ namespace World
             }
         }
 #endif
+        
+        private void OnGridSelect()
+        {
+            var ray = Camera.main!.ScreenPointToRay(InputManager.MousePosition);
+            if (!Physics.Raycast(ray, out var hit)) return;
+            if (!hit.collider.GetComponent<GridBehaviour>()) return;
+            
+            var gridPosition = GetGridPosition(hit.point);
+            var cell = GetCell(gridPosition.x, gridPosition.y);
+            Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}, World Position:{cell.WorldPosition}</color>");
+        }
 
         private void CalculateCellSize()
+            => _cellSize = new Vector3(gridDimensions.x / columns, gridDimensions.y, gridDimensions.z / rows);
+        
+        private void CreateGrid()
         {
-            _cellSize = new Vector3(gridDimensions.x / columns, gridDimensions.y, gridDimensions.z / rows);
+            _grid = new Cell[columns, rows];
+            for (var x = 0; x < columns; x++)
+            {
+                for (var z = 0; z < rows; z++)
+                {
+                    var center = GetCellCenter(x, z);
+                    var worldPosition = transform.position + new Vector3(x * _cellSize.x, 0, z * _cellSize.z);
+                    _grid[x, z] = new Cell(center, worldPosition, x, z);
+                }
+            }
         }
 
         public Vector3 GetCellCenter(int x, int z)
@@ -66,6 +96,31 @@ namespace World
             var x = Mathf.FloorToInt((worldPosition.x - startPos.x) / _cellSize.x);
             var z = Mathf.FloorToInt((worldPosition.z - startPos.z) / _cellSize.z);
             return new Vector2Int(x, z);
+        }
+
+        public Cell GetCell(int x, int z)
+        {
+            if (x >= 0 && x < columns && z >= 0 && z < rows)
+                return _grid[x, z];
+
+            return null;
+        }
+
+        [Serializable]
+        public class Cell
+        {
+            public Vector3 Center { get; private set; }
+            public Vector3 WorldPosition { get; private set; }
+            public int X { get; private set; }
+            public int Z { get; private set; }
+            
+            public Cell(Vector3 center, Vector3 worldPosition, int x, int z)
+            {
+                Center = center;
+                WorldPosition = worldPosition;
+                X = x;
+                Z = z;
+            }
         }
     }
 }

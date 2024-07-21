@@ -44,6 +44,24 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseDelta"",
+                    ""type"": ""Value"",
+                    ""id"": ""54aeec92-de48-4eb1-a934-ae1ccfbc157f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""ac796689-873e-4e82-b7d2-08e3589edff9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +86,28 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""HypeTest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1365a2e6-0b0e-4244-bb28-c215b0be64ac"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseDelta"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8da82de-8113-45d2-b9a5-cc642265628f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +118,8 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Controls = asset.FindActionMap("Controls", throwIfNotFound: true);
         m_Controls_Combo = m_Controls.FindAction("Combo", throwIfNotFound: true);
         m_Controls_HypeTest = m_Controls.FindAction("HypeTest", throwIfNotFound: true);
+        m_Controls_MouseDelta = m_Controls.FindAction("MouseDelta", throwIfNotFound: true);
+        m_Controls_Select = m_Controls.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +183,16 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private List<IControlsActions> m_ControlsActionsCallbackInterfaces = new List<IControlsActions>();
     private readonly InputAction m_Controls_Combo;
     private readonly InputAction m_Controls_HypeTest;
+    private readonly InputAction m_Controls_MouseDelta;
+    private readonly InputAction m_Controls_Select;
     public struct ControlsActions
     {
         private @Inputs m_Wrapper;
         public ControlsActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Combo => m_Wrapper.m_Controls_Combo;
         public InputAction @HypeTest => m_Wrapper.m_Controls_HypeTest;
+        public InputAction @MouseDelta => m_Wrapper.m_Controls_MouseDelta;
+        public InputAction @Select => m_Wrapper.m_Controls_Select;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +208,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @HypeTest.started += instance.OnHypeTest;
             @HypeTest.performed += instance.OnHypeTest;
             @HypeTest.canceled += instance.OnHypeTest;
+            @MouseDelta.started += instance.OnMouseDelta;
+            @MouseDelta.performed += instance.OnMouseDelta;
+            @MouseDelta.canceled += instance.OnMouseDelta;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
         }
 
         private void UnregisterCallbacks(IControlsActions instance)
@@ -172,6 +224,12 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @HypeTest.started -= instance.OnHypeTest;
             @HypeTest.performed -= instance.OnHypeTest;
             @HypeTest.canceled -= instance.OnHypeTest;
+            @MouseDelta.started -= instance.OnMouseDelta;
+            @MouseDelta.performed -= instance.OnMouseDelta;
+            @MouseDelta.canceled -= instance.OnMouseDelta;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
         }
 
         public void RemoveCallbacks(IControlsActions instance)
@@ -193,5 +251,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     {
         void OnCombo(InputAction.CallbackContext context);
         void OnHypeTest(InputAction.CallbackContext context);
+        void OnMouseDelta(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }
