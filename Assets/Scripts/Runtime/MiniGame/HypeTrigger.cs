@@ -5,6 +5,9 @@ using Random = UnityEngine.Random;
 
 namespace MiniGame
 {
+    /// <summary>
+    /// UI element used in the hype mini-game to trigger the hype.
+    /// </summary>
     public class HypeTrigger : MonoBehaviour
     {
         public Action OnHypeTriggerDestroyed;

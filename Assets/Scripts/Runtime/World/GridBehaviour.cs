@@ -60,7 +60,8 @@ namespace World
             
             var gridPosition = GetGridPosition(hit.point);
             var cell = GetCell(gridPosition.x, gridPosition.y);
-            Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}, World Position:{cell.WorldPosition}</color>");
+            Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}</color>");
+            TowerManager.Instance.PlaceTower(cell.Center);
         }
 
         private void CalculateCellSize()
@@ -74,8 +75,7 @@ namespace World
                 for (var z = 0; z < rows; z++)
                 {
                     var center = GetCellCenter(x, z);
-                    var worldPosition = transform.position + new Vector3(x * _cellSize.x, 0, z * _cellSize.z);
-                    _grid[x, z] = new Cell(center, worldPosition, x, z);
+                    _grid[x, z] = new Cell(center, x, z);
                 }
             }
         }
@@ -110,14 +110,12 @@ namespace World
         public class Cell
         {
             public Vector3 Center { get; private set; }
-            public Vector3 WorldPosition { get; private set; }
             public int X { get; private set; }
             public int Z { get; private set; }
             
-            public Cell(Vector3 center, Vector3 worldPosition, int x, int z)
+            public Cell(Vector3 center, int x, int z)
             {
                 Center = center;
-                WorldPosition = worldPosition;
                 X = x;
                 Z = z;
             }

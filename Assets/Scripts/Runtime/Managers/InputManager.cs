@@ -24,6 +24,8 @@ namespace Managers
         
         public static InputAction MouseDelta => Instance._inputs.Controls.MouseDelta;
         public static InputAction Select => Instance._inputs.Controls.Select;
+        
+        public static InputAction Menu => Instance._inputs.Controls.Menu;
 
         #endregion
         

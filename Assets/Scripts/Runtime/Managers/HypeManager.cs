@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Managers
 {
+    /// <summary>
+    /// Manager that handles the hype mini-game.
+    /// </summary>
     [InitializeSingleton]
     public class HypeManager : MonoSingleton<HypeManager>
     {
@@ -13,7 +16,7 @@ namespace Managers
         public float niceHypeTime = 5.0f;
         public float prematureHypeTime = 10.0f;
 
-        private Queue<Hype> _hypes = new();
+        private readonly Queue<Hype> _hypes = new();
         private HypeTrigger _hypeTrigger;
         private bool _canSpawnHype = true;
 

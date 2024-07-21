@@ -36,4 +36,5 @@ public enum PrefabType
     None = 0,
     Hype = 1,
     HypeTrigger = 2,
+    Tower = 3,
 }

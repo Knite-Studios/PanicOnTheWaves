@@ -22,23 +22,30 @@ namespace Managers
         /// Static shortcut method for creating a prefab.
         /// </summary>
         /// <param name="prefab">The type of prefab to create.</param>
+        /// <param name="position">The position where the new object should be created.</param>
         /// <param name="parent">The parent transform.</param>
         /// <param name="active">The active state of the prefab.</param>
-        public static GameObject Create(PrefabType prefab, Transform parent = null, bool active = true)
-            => Instance.Instantiate(prefab, parent, active);
+        public static GameObject Create(PrefabType prefab, Vector3 position = default, Transform parent = null, bool active = true)
+            => position == default ?
+                Instance.Instantiate(prefab, parent, active) :
+                Instance.Instantiate(prefab, position, parent, active);
 
         // ReSharper disable Unity.PerformanceAnalysis
         /// <summary>
         /// Overload for creating a prefab and returning a component.
         /// </summary>
         /// <param name="prefab">The type of prefab to create.</param>
+        /// <param name="position">The position where the new object should be created.</param>
         /// <param name="parent">The parent transform.</param>
         /// <param name="active">The active state of the prefab.</param>
         /// <typeparam name="T">The type of component to return.</typeparam>
         /// <returns>The component of the prefab.</returns>
-        public static T Create<T>(PrefabType prefab, Transform parent = null, bool active = true) where T : Component
+        public static T Create<T>(PrefabType prefab, Vector3 position = default, 
+            Transform parent = null, bool active = true) where T : Component
         {
-            var newObject = Instance.Instantiate(prefab, parent, active);
+            var newObject = position == default ?
+                Instance.Instantiate(prefab, parent, active) :
+                Instance.Instantiate(prefab, position, parent, active);
             var component = newObject.GetComponent<T>();
             if (component == null)
                 Debug.LogError($"Prefab {prefab} does not have component {typeof(T)}");
@@ -138,6 +145,13 @@ namespace Managers
                 }
             }
 
+            return newObject;
+        }
+
+        private GameObject Instantiate(PrefabType prefab, Vector3 position, Transform parent, bool active)
+        {
+            var newObject = Instantiate(prefab, parent, active);
+            newObject.transform.position = position;
             return newObject;
         }
 

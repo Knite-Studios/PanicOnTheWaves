@@ -1,9 +1,11 @@
 ﻿using System;
-using Extensions;
 using UnityEngine;
 
 namespace MiniGame
 {
+    /// <summary>
+    /// UI element that spawns the hype object.
+    /// </summary>
     public class Hype : MonoBehaviour
     {
         public Action OnHypeDestroyed;
@@ -28,21 +30,6 @@ namespace MiniGame
             Destroy(Target!.gameObject);
         }
 
-        // private void OnTriggerEnter2D(Collider2D other)
-        // {
-        //     if (!other.TryGetComponent<HypeTrigger>(out var hypeTrigger)) return;
-        //     if (hypeTrigger != _owner) return;
-        //     Debug.Log("Missed Hype!");
-        // }
-        //
-        // private void OnTriggerExit2D(Collider2D other)
-        // {
-        //     if (!other.TryGetComponent<HypeTrigger>(out var hypeTrigger)) return;
-        //     if (hypeTrigger != _owner) return;
-        //     
-        //     Debug.Log("Missed Hypeeeeeeeeeeeeee!");
-        // }
-        
         private void OnDestroy()
         {
             // Invoke the event first.
