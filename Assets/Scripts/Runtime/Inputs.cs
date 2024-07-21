@@ -62,6 +62,15 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""d15f2605-b30c-44f7-8d21-91550f9b7799"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,6 +117,17 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78e185fa-6bf1-44dc-908d-c645c19eb37d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +140,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Controls_HypeTest = m_Controls.FindAction("HypeTest", throwIfNotFound: true);
         m_Controls_MouseDelta = m_Controls.FindAction("MouseDelta", throwIfNotFound: true);
         m_Controls_Select = m_Controls.FindAction("Select", throwIfNotFound: true);
+        m_Controls_Menu = m_Controls.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,6 +206,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Controls_HypeTest;
     private readonly InputAction m_Controls_MouseDelta;
     private readonly InputAction m_Controls_Select;
+    private readonly InputAction m_Controls_Menu;
     public struct ControlsActions
     {
         private @Inputs m_Wrapper;
@@ -193,6 +215,7 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         public InputAction @HypeTest => m_Wrapper.m_Controls_HypeTest;
         public InputAction @MouseDelta => m_Wrapper.m_Controls_MouseDelta;
         public InputAction @Select => m_Wrapper.m_Controls_Select;
+        public InputAction @Menu => m_Wrapper.m_Controls_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -214,6 +237,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         private void UnregisterCallbacks(IControlsActions instance)
@@ -230,6 +256,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         public void RemoveCallbacks(IControlsActions instance)
@@ -253,5 +282,6 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         void OnHypeTest(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }
