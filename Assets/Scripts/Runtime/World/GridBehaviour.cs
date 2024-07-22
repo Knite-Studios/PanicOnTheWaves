@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Managers;
 using UnityEngine;
 
@@ -36,7 +36,7 @@ namespace World
             if (showGrid)
             {
                 Gizmos.color = Color.magenta;
-                var startPos = transform.position - new Vector3(gridDimensions.x / 2, 0, gridDimensions.z / 2);
+                var startPos = transform.position - new Vector3(gridDimensions.x / 2, -gridDimensions.y / 2, gridDimensions.z / 2);
 
                 for (var x = 0; x <= columns; x++)
                 {
@@ -54,17 +54,17 @@ namespace World
             }
         }
 #endif
-        
+
         private void OnGridSelect()
         {
             var ray = Camera.main!.ScreenPointToRay(InputManager.MousePosition);
             if (!Physics.Raycast(ray, out var hit)) return;
             if (!hit.collider.GetComponent<GridBehaviour>()) return;
-            
+
             var gridPosition = GetGridPosition(hit.point);
             var cell = GetCell(gridPosition.x, gridPosition.y);
             Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}, Top Center:{cell.TopCenter}</color>");
-            
+
             // Ensures that we're only placing towers when we have a selection.
             if (TowerManager.Instance.HasSelection)
                 TowerManager.Instance.PlaceTower(cell.TopCenter);
@@ -72,7 +72,7 @@ namespace World
 
         private void CalculateCellSize()
             => _cellSize = new Vector3(gridDimensions.x / columns, gridDimensions.y, gridDimensions.z / rows);
-        
+
         private void CreateGrid()
         {
             _grid = new Cell[columns, rows];
@@ -89,14 +89,14 @@ namespace World
 
         public Vector3 GetCellCenter(int x, int z)
         {
-            var startPos = transform.position - new Vector3(gridDimensions.x / 2, 0, gridDimensions.z / 2);
+            var startPos = transform.position - new Vector3(gridDimensions.x / 2, -gridDimensions.y / 2, gridDimensions.z / 2);
             var halfCellX = _cellSize.x * 0.5f;
             var halfCellZ = _cellSize.z * 0.5f;
             var cellX = startPos.x + x * _cellSize.x + halfCellX;
             var cellZ = startPos.z + z * _cellSize.z + halfCellZ;
-            return new Vector3(cellX, transform.position.y, cellZ);
+            return new Vector3(cellX, startPos.y, cellZ);
         }
-        
+
         public Vector3 GetCellTopCenter(int x, int z)
         {
             var center = GetCellCenter(x, z);
@@ -105,7 +105,7 @@ namespace World
 
         public Vector2Int GetGridPosition(Vector3 worldPosition)
         {
-            var startPos = transform.position - new Vector3(gridDimensions.x / 2, 0, gridDimensions.z / 2);
+            var startPos = transform.position - new Vector3(gridDimensions.x / 2, -gridDimensions.y / 2, gridDimensions.z / 2);
             var x = Mathf.FloorToInt((worldPosition.x - startPos.x) / _cellSize.x);
             var z = Mathf.FloorToInt((worldPosition.z - startPos.z) / _cellSize.z);
             return new Vector2Int(x, z);
@@ -126,7 +126,7 @@ namespace World
             public Vector3 TopCenter { get; private set; }
             public int X { get; private set; }
             public int Z { get; private set; }
-            
+
             public Cell(Vector3 center, Vector3 topCenter, int x, int z)
             {
                 Center = center;
