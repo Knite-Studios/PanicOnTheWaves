@@ -40,7 +40,7 @@ namespace World
             for (var i = 0; i < grid.Rows; i++)
             {
                 var spawnPoint = new GameObject($"SpawnPoint_{i}").transform;
-                var cellCenter = grid.GetCellCenter(0, i);
+                var cellCenter = grid.GetCellTopCenter(0, i);
                 // Debug.Log($"Cell Center: {cellCenter}");
 
                 spawnPoint.position = new Vector3(transform.position.x, transform.position.y,

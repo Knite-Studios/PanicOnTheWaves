@@ -81,7 +81,7 @@ namespace World
                 for (var z = 0; z < rows; z++)
                 {
                     var center = GetCellCenter(x, z);
-                    var topCenter = new Vector3(center.x, center.y + _cellSize.y / 2, center.z);
+                    var topCenter = GetCellTopCenter(x, z);
                     _grid[x, z] = new Cell(center, topCenter, x, z);
                 }
             }
@@ -95,6 +95,12 @@ namespace World
             var cellX = startPos.x + x * _cellSize.x + halfCellX;
             var cellZ = startPos.z + z * _cellSize.z + halfCellZ;
             return new Vector3(cellX, transform.position.y, cellZ);
+        }
+        
+        public Vector3 GetCellTopCenter(int x, int z)
+        {
+            var center = GetCellCenter(x, z);
+            return new Vector3(center.x, center.y + _cellSize.y / 2, center.z);
         }
 
         public Vector2Int GetGridPosition(Vector3 worldPosition)
