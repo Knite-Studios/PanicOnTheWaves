@@ -11,6 +11,8 @@ namespace Managers
         [SerializeField] private int initialHype = 100;
 
         public UnityEvent<int> onHypeChange;
+        
+        public bool HasSelection => _isPlacingTower;
 
         private int _currentHype;
         private TowerInfo _selectedTower;

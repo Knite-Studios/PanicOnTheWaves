@@ -63,8 +63,11 @@ namespace World
             
             var gridPosition = GetGridPosition(hit.point);
             var cell = GetCell(gridPosition.x, gridPosition.y);
-            Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}</color>");
-            TowerManager.Instance.PlaceTower(cell.Center);
+            Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}, Top Center:{cell.TopCenter}</color>");
+            
+            // Ensures that we're only placing towers when we have a selection.
+            if (TowerManager.Instance.HasSelection)
+                TowerManager.Instance.PlaceTower(cell.TopCenter);
         }
 
         private void CalculateCellSize()
@@ -78,7 +81,8 @@ namespace World
                 for (var z = 0; z < rows; z++)
                 {
                     var center = GetCellCenter(x, z);
-                    _grid[x, z] = new Cell(center, x, z);
+                    var topCenter = new Vector3(center.x, center.y + _cellSize.y / 2, center.z);
+                    _grid[x, z] = new Cell(center, topCenter, x, z);
                 }
             }
         }
@@ -113,12 +117,14 @@ namespace World
         public class Cell
         {
             public Vector3 Center { get; private set; }
+            public Vector3 TopCenter { get; private set; }
             public int X { get; private set; }
             public int Z { get; private set; }
             
-            public Cell(Vector3 center, int x, int z)
+            public Cell(Vector3 center, Vector3 topCenter, int x, int z)
             {
                 Center = center;
+                TopCenter = topCenter;
                 X = x;
                 Z = z;
             }

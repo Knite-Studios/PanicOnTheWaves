@@ -15,7 +15,7 @@ MonoBehaviour:
   prefabs:
   - type: 1
     prefab: {fileID: 413174452469809454, guid: 67a1c619129242442abc46388f27b9ec, type: 3}
-    root: Canvas/HypeContainer
+    root: Canvas/HypeContainer/PlayableArea
     shouldPool: 0
     initialPoolSize: 0
   - type: 2

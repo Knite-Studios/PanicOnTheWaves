@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Common;
 using Common.Attributes;
 using Common.Utils;
+using UnityEngine;
 
 namespace Managers
 {
@@ -13,6 +13,16 @@ namespace Managers
             base.Awake();
 
             InitializeManagers();
+        }
+        
+        private void Update()
+        {
+            // TODO: Temporary only for prototype.
+            if (InputManager.HypeTest.triggered)
+            {
+                HypeManager.Instance.SpawnHype();
+                Debug.Log("Hype spawned!");
+            }
         }
 
         /// <summary>
@@ -25,15 +35,6 @@ namespace Managers
                          singleton => singleton.GetMethod("Initialize")))
             {
                 method?.Invoke(null, null);
-            }
-        }
-
-        private void Update()
-        {
-            // TODO: Temporary only for prototype.
-            if (InputManager.HypeTest.triggered)
-            {
-                HypeManager.Instance.SpawnHype();
             }
         }
     }
