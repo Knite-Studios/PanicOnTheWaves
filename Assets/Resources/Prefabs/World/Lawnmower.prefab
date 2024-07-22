@@ -49,19 +49,52 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: f3855ba718e62b3479a462e55c14c3a4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f3855ba718e62b3479a462e55c14c3a4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f5ffb23c71776424f8f776c97d3fd190, type: 2}
+      objectReference: {fileID: 2100000, guid: 74117f645ca87544896e430b75e9a316, type: 2}
     - target: {fileID: -5754084199372789682, guid: f3855ba718e62b3479a462e55c14c3a4, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+      objectReference: {fileID: -8089888234731176865, guid: d0c9de33958b0324aad988d7d61348e7, type: 3}
     - target: {fileID: 919132149155446097, guid: f3855ba718e62b3479a462e55c14c3a4, type: 3}
       propertyPath: m_Name
-      value: Lawnmover
+      value: Lawnmower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f3855ba718e62b3479a462e55c14c3a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4800626754688541602}
   m_SourcePrefab: {fileID: 100100000, guid: f3855ba718e62b3479a462e55c14c3a4, type: 3}
+--- !u!1 &2618712714418558218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f3855ba718e62b3479a462e55c14c3a4, type: 3}
+  m_PrefabInstance: {fileID: 2924771879316793435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4800626754688541602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618712714418558218}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.38403782, y: 1.275092, z: 0.40386328}
+  m_Center: {x: 0.00016003106, y: 0.29980832, z: 0.032638848}
