@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace MiniGame
 {
@@ -8,7 +8,7 @@ namespace MiniGame
     /// </summary>
     public class Hype : MonoBehaviour
     {
-        public Action OnHypeDestroyed;
+        public UnityAction OnHypeDestroyed;
 
         [SerializeField] private float speed = 200.0f;
 
@@ -38,7 +38,7 @@ namespace MiniGame
             // Unsubscribe to all handlers.
             foreach (var d in OnHypeDestroyed!.GetInvocationList())
             {
-                OnHypeDestroyed -= (Action) d;
+                OnHypeDestroyed -= (UnityAction) d;
             }
         }
 

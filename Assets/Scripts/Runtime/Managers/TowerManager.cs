@@ -2,6 +2,7 @@
 using Scriptable.Scriptable;
 using UnityEngine;
 using UnityEngine.Events;
+using World;
 
 namespace Managers
 {
@@ -31,17 +32,22 @@ namespace Managers
             _isPlacingTower = true;
         }
 
-        public void PlaceTower(Vector3 position)
+        public void PlaceTower(GridBehaviour.Cell cell)
         {
             if (!_isPlacingTower || _selectedTower == null) return;
             if (_currentHype < _selectedTower.cost) return;
+            if (cell.IsOccupied) return;
 
-            PrefabManager.Create(_selectedTower.towerPrefab, position);
+            var tower = PrefabManager.Create<Tower>(_selectedTower.towerPrefab, cell.TopCenter);
+            cell.IsOccupied = true;
+
             _currentHype -= _selectedTower.cost;
             onHypeChange?.Invoke(_currentHype);
             
             _isPlacingTower = false;
             _selectedTower = null;
+            
+            tower.OnTowerDestroyed += () => cell.IsOccupied = false;
         }
     }
 }

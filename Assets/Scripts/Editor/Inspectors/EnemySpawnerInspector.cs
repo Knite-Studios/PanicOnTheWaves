@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using World;
+﻿using World;
 
 namespace Editor.Inspectors
 {

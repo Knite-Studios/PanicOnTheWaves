@@ -56,7 +56,7 @@ namespace Managers
         {
             public static void Register()
             {
-                var input = InputManager.Instance;
+                var input = Instance;
                 input.Controls.Select.started += Select_OnStarted;
                 input.Controls.Select.canceled += Select_OnCanceled;
                 input.Controls.Select.performed += Select_OnPerformed;
@@ -66,12 +66,12 @@ namespace Managers
 
             private static void Select_OnStarted(InputAction.CallbackContext context)
             {
-                InputManager.Instance.StartSelectGrid?.Invoke();
+                Instance.StartSelectGrid?.Invoke();
             }
             
             private static void Select_OnCanceled(InputAction.CallbackContext context)
             {
-                InputManager.Instance.StopSelectGrid?.Invoke();
+                Instance.StopSelectGrid?.Invoke();
             }
             
             private static void Select_OnPerformed(InputAction.CallbackContext context)

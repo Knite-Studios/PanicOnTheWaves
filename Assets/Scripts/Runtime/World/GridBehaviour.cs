@@ -66,8 +66,8 @@ namespace World
             Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}, Top Center:{cell.TopCenter}</color>");
 
             // Ensures that we're only placing towers when we have a selection.
-            if (TowerManager.Instance.HasSelection)
-                TowerManager.Instance.PlaceTower(cell.TopCenter);
+            if (TowerManager.Instance.HasSelection && !cell.IsOccupied)
+                TowerManager.Instance.PlaceTower(cell);
         }
 
         private void CalculateCellSize()
@@ -126,6 +126,8 @@ namespace World
             public Vector3 TopCenter { get; private set; }
             public int X { get; private set; }
             public int Z { get; private set; }
+            public bool IsOccupied { get; set; }
+
 
             public Cell(Vector3 center, Vector3 topCenter, int x, int z)
             {
@@ -133,6 +135,7 @@ namespace World
                 TopCenter = topCenter;
                 X = x;
                 Z = z;
+                IsOccupied = false;
             }
         }
     }
