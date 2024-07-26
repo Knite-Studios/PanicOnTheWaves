@@ -2,6 +2,7 @@
 using Interfaces;
 using Systems.Attributes;
 using UnityEngine;
+using World;
 
 namespace Entity
 {
@@ -16,12 +17,14 @@ namespace Entity
         public int Damage => this.GetAttributeValue<int>(GameAttribute.Damage);
 
         #endregion
-        
+
+        protected GridBehaviour Grid;
         protected internal Rigidbody Rb;
         protected internal Animator Anim;
 
         protected virtual void Awake()
         {
+            Grid = FindObjectOfType<GridBehaviour>();
             Rb = GetComponent<Rigidbody>();
             Anim = GetComponent<Animator>();
 

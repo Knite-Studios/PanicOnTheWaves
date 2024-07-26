@@ -136,6 +136,32 @@ namespace World
             return waypoints;
         }
 
+        public List<Cell> GetCellsInRowRange(int startX, int startZ, int range)
+        {
+            var cells = new List<Cell>();
+            
+            for (var x = startX - range; x <= startX + range; x++)
+            {
+                var cell = GetCell(x, startZ);
+                if (cell != null) cells.Add(cell);
+            }
+
+            return cells;
+        }
+        
+        public List<Cell> GetCellsInColumnRange(int startX, int startZ, int range)
+        {
+            var cells = new List<Cell>();
+            
+            for (var z = startZ - range; z <= startZ + range; z++)
+            {
+                var cell = GetCell(startX, z);
+                if (cell != null) cells.Add(cell);
+            }
+
+            return cells;
+        }
+
         [Serializable]
         public class Cell
         {
