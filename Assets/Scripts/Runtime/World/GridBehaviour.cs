@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
@@ -117,6 +118,22 @@ namespace World
                 return _grid[x, z];
 
             return null;
+        }
+
+        public List<Vector3> GetRowWaypoints(int idx)
+        {
+            // Check if the index is within bounds.
+            if (idx < 0 || idx >= rows) return null;
+
+            var waypoints = new List<Vector3>();
+
+            for (var i = 0; i < columns; i++)
+            {
+                // var cell = GetCell(i, idx);
+                waypoints.Add(GetCellTopCenter(i, idx));
+            }
+            
+            return waypoints;
         }
 
         [Serializable]

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entity.Enemies;
 using Managers;
 using NaughtyAttributes;
 using Scriptable;
@@ -11,7 +12,7 @@ namespace World
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private GridBehaviour grid;
-        [SerializeField] private List<EnemyInfo> enemies = new List<EnemyInfo>();
+        [SerializeField] private List<EnemyInfo> enemies = new();
         [SerializeField] private bool randomSpawn;
         [SerializeField] private float spawnInterval = 3.0f;
 
@@ -54,7 +55,8 @@ namespace World
             if (rowIndex < 0 || rowIndex >= _spawnPoints.Count) return;
 
             var spawnPosition = _spawnPoints[rowIndex].position;
-            PrefabManager.Create(enemyInfo.prefab, spawnPosition);
+            var enemy = PrefabManager.Create<BaseEnemy>(enemyInfo.prefab, spawnPosition);
+            enemy.SetPath(grid.GetRowWaypoints(rowIndex));
         }
 
         [Button]

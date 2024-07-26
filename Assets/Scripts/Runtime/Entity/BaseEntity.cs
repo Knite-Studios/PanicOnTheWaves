@@ -18,10 +18,12 @@ namespace Entity
         #endregion
         
         protected internal Rigidbody Rb;
+        protected internal Animator Anim;
 
         protected virtual void Awake()
         {
             Rb = GetComponent<Rigidbody>();
+            Anim = GetComponent<Animator>();
 
             ApplyBaseAttributes();
         }
