@@ -1,4 +1,5 @@
 ﻿using Common;
+using Entity.Towers;
 using Scriptable.Scriptable;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,7 +39,7 @@ namespace Managers
             if (_currentHype < _selectedTower.cost) return;
             if (cell.IsOccupied) return;
 
-            var tower = PrefabManager.Create<Tower>(_selectedTower.towerPrefab, cell.TopCenter);
+            var tower = PrefabManager.Create<BaseTower>(_selectedTower.towerPrefab, cell.TopCenter);
             cell.IsOccupied = true;
 
             _currentHype -= _selectedTower.cost;

@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca631de332b646bcbb80d05a7488aad5, type: 3}
-  m_Name: EnemyTest
+  m_Name: SneakyGhost
   m_EditorClassIdentifier: 
-  prefab: 4
-  enemyName: EnemySample
+  prefab: 7
+  health: 120
+  damage: 0
+  speed: 20

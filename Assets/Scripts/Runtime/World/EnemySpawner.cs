@@ -42,7 +42,7 @@ namespace World
                 var spawnPoint = new GameObject($"SpawnPoint_{i}").transform;
                 var cellTopCenter = grid.GetCellTopCenter(0, i);
                 // Debug.Log($"Cell Center: {cellCenter}");
-                // Adjust the spawn point position to be at the top surface
+                // Adjust the spawn point position to be at the top surface.
                 spawnPoint.position = new Vector3(transform.position.x, cellTopCenter.y, cellTopCenter.z);
                 spawnPoint.parent = transform;
                 _spawnPoints.Add(spawnPoint);

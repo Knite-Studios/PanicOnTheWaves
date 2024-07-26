@@ -128,7 +128,6 @@ namespace World
             public int Z { get; private set; }
             public bool IsOccupied { get; set; }
 
-
             public Cell(Vector3 center, Vector3 topCenter, int x, int z)
             {
                 Center = center;

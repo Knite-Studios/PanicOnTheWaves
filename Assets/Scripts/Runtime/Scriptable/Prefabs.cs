@@ -37,5 +37,9 @@ public enum PrefabType
     Hype = 1,
     HypeTrigger = 2,
     Tower = 3,
-    Enemy = 4,
+    BasicEnemy = 4,
+    ConeheadZombie = 5,
+    RushEnemy = 6,
+    SneakyGhost = 7,
+    TankEnemy = 8,
 }

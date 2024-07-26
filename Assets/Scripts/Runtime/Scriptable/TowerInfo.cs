@@ -9,6 +9,9 @@ namespace Scriptable
         {
             public PrefabType towerPrefab;
             public int cost;
+
+            public int health;
+            public int damage;
         }
     }
 }
