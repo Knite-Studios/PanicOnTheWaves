@@ -3,8 +3,7 @@
     "rootNamespace": "",
     "references": [
         "NaughtyAttributes.Core",
-        "POTW.Runtime",
-        "POTW.Editor"
+        "POTW.Runtime"
     ],
     "includePlatforms": [
         "Editor"
