@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Common.Attributes;
+using UnityEngine;
 
 namespace Scriptable
 {
@@ -7,6 +8,10 @@ namespace Scriptable
     {
         public PrefabType prefab;
 
+        public int cost;
+        public int weight;
+
+        [TitleHeader("Enemy Stats")]
         public int health;
         public int damage;
         public float speed;

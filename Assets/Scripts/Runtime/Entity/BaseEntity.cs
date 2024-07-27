@@ -39,6 +39,9 @@ namespace Entity
         public virtual void TakeDamage(int damage)
         {
             CurrentHealth -= damage;
+
+            if (CurrentHealth <= 0)
+                Destroy(gameObject);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Entity.Towers;
 using Managers;
 using UnityEngine;
 
@@ -64,11 +65,12 @@ namespace World
 
             var gridPosition = GetGridPosition(hit.point);
             var cell = GetCell(gridPosition.x, gridPosition.y);
-            Debug.Log($"<color=yellow>Cell: {cell.X}, {cell.Z}, Center:{cell.Center}, Top Center:{cell.TopCenter}</color>");
 
             // Ensures that we're only placing towers when we have a selection.
             if (TowerManager.Instance.HasSelection && !cell.IsOccupied)
                 TowerManager.Instance.PlaceTower(cell);
+
+            Debug.Log($"<color=yellow>Cell:{cell.X}, {cell.Z}, Top Center:{cell.TopCenter}, Base:{cell.OccupyingTower.name}</color>");
         }
 
         private void CalculateCellSize()
@@ -161,6 +163,24 @@ namespace World
 
             return cells;
         }
+        
+        public void AddTowerInCell(int x, int z, BaseTower tower)
+        {
+            var cell = GetCell(x, z);
+            if (cell == null) return;
+
+            cell.IsOccupied = true;
+            cell.OccupyingTower = tower;
+        }
+        
+        public void RemoveTowerInCell(int x, int z)
+        {
+            var cell = GetCell(x, z);
+            if (cell == null) return;
+
+            cell.IsOccupied = false;
+            cell.OccupyingTower = null;
+        }
 
         [Serializable]
         public class Cell
@@ -170,6 +190,7 @@ namespace World
             public int X { get; private set; }
             public int Z { get; private set; }
             public bool IsOccupied { get; set; }
+            public BaseTower OccupyingTower { get; set; }
 
             public Cell(Vector3 center, Vector3 topCenter, int x, int z)
             {
@@ -178,6 +199,7 @@ namespace World
                 X = x;
                 Z = z;
                 IsOccupied = false;
+                OccupyingTower = null;
             }
         }
     }

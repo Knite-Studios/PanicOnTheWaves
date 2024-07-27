@@ -3,6 +3,7 @@ using Entity.Towers;
 using Scriptable.Scriptable;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using World;
 
 namespace Managers
@@ -19,15 +20,33 @@ namespace Managers
         private int _currentHype;
         private TowerInfo _selectedTower;
         private bool _isPlacingTower;
+        private GridBehaviour _grid;
 
         private void Start()
         {
             _currentHype = initialHype;
             onHypeChange?.Invoke(_currentHype);
+            _grid = FindObjectOfType<GridBehaviour>();
+        }
+
+        protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            _isPlacingTower = false;
+            _selectedTower = null;
+            _grid = FindObjectOfType<GridBehaviour>();
+        }
+
+        protected override void OnSceneUnloaded(Scene scene)
+        {
+            _isPlacingTower = false;
+            _selectedTower = null;
+            _grid = null;
         }
 
         public void SelectTower(TowerInfo towerInfo)
         {
+            if (!_grid) _grid = FindObjectOfType<GridBehaviour>();
+
             Debug.Log($"<color=green>Selected tower: {towerInfo.name}</color>");
             _selectedTower = towerInfo;
             _isPlacingTower = true;
@@ -39,8 +58,10 @@ namespace Managers
             if (_currentHype < _selectedTower.cost) return;
             if (cell.IsOccupied) return;
 
+            if (!_grid) _grid = FindObjectOfType<GridBehaviour>();
+
             var tower = PrefabManager.Create<BaseTower>(_selectedTower.towerPrefab, cell.TopCenter);
-            cell.IsOccupied = true;
+            _grid.AddTowerInCell(cell.X, cell.Z, tower);
 
             _currentHype -= _selectedTower.cost;
             onHypeChange?.Invoke(_currentHype);
@@ -48,7 +69,7 @@ namespace Managers
             _isPlacingTower = false;
             _selectedTower = null;
             
-            tower.OnTowerDestroyed += () => cell.IsOccupied = false;
+            tower.OnTowerDestroyed += () => _grid.RemoveTowerInCell(cell.X, cell.Z);
         }
     }
 }
