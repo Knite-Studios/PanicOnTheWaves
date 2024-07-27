@@ -10,7 +10,7 @@ namespace World.Projectiles
     {
         [SerializeField] protected float speed = 10.0f;
         [SerializeField] protected float lifetime = 5.0f;
-        [SerializeField, RequiredEnum(0)] protected PrefabType prefabType;
+        [SerializeField, ExcludeEnum(0)] protected PrefabType prefabType;
 
         private int _damage;
         private BaseEntity _owner;
