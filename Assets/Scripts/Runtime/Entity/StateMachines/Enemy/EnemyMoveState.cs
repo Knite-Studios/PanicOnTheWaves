@@ -6,6 +6,7 @@ namespace Entity.StateMachines.Enemy
     public class EnemyMoveState : EnemyBaseState
     {
         private int _currentWaypointIndex;
+
         public EnemyMoveState(string name, BaseEntity owner) : base(name, owner)
         {
         }
@@ -42,9 +43,7 @@ namespace Entity.StateMachines.Enemy
                 (Enemy.GetAttributeValue<float>(GameAttribute.Speed) * Time.fixedDeltaTime));
 
             if (Vector3.Distance(Enemy.transform.position, targetPosition) < 0.1f)
-            {
                 _currentWaypointIndex++;
-            }
         }
     }
 }

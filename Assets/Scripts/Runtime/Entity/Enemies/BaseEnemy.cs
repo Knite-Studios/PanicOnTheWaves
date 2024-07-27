@@ -23,10 +23,10 @@ namespace Entity.Enemies
         
         #endregion
 
+        private BaseState<BaseEntity> _currentState;
+
         public BaseState<BaseEntity> State => _currentState;
         public List<Vector3> PathWaypoints { get; private set; }
-
-        private BaseState<BaseEntity> _currentState;
 
         protected override void Awake()
         {

@@ -8,7 +8,7 @@ namespace Entity.StateMachines.Enemy
         protected readonly BaseEnemy Enemy;
 
         private float _actionTimer;
-        private bool _isActionReady => _actionTimer <= 0;
+        private bool IsActionReady => _actionTimer <= 0;
 
         public EnemyBaseState(string name, BaseEntity owner) : base(name, owner)
         {
@@ -18,15 +18,20 @@ namespace Entity.StateMachines.Enemy
 
         public override void UpdateState()
         {
-            if (!_isActionReady)
+            if (!IsActionReady)
             {
                 _actionTimer -= Time.deltaTime;
                 return;
             }
             
-            // If we're ready to perform an action, we handle switching to Move or Attack states.
-            // For now we'll just switch to MoveState.
-            Enemy.ChangeState(Enemy.MoveState);
+            // Check for towers in the current cell.
+            var gridPosition = Enemy.Grid.GetGridPosition(Enemy.transform.position);
+            var currentCell = Enemy.Grid.GetCell(gridPosition);
+
+            // If there's a tower in the current cell, attack it. Otherwise, move.
+            Enemy.ChangeState(currentCell != null && currentCell.OccupyingTower
+                ? Enemy.AttackState
+                : Enemy.MoveState);
         }
     }
 }

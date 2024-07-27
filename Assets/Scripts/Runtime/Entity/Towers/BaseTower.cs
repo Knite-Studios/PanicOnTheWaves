@@ -10,7 +10,7 @@ namespace Entity.Towers
     {
         [TitleHeader("Base Tower Settings")]
         [SerializeField] private TowerInfo info;
-        
+
         public event UnityAction OnTowerDestroyed;
 
         protected override void ApplyBaseAttributes()

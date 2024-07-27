@@ -16,10 +16,10 @@ namespace World
         [SerializeField] private bool showGrid = true;
 #endif
 
-        public int Rows => rows;
-
         private Vector3 _cellSize;
         private Cell[,] _grid;
+
+        public int Rows => rows;
 
         private void Start()
         {
@@ -121,6 +121,9 @@ namespace World
 
             return null;
         }
+        
+        public Cell GetCell(Vector2Int gridPosition)
+            => GetCell(gridPosition.x, gridPosition.y);
 
         public List<Vector3> GetRowWaypoints(int idx)
         {
