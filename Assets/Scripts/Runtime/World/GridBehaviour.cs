@@ -59,6 +59,8 @@ namespace World
 
         private void OnGridSelect()
         {
+            if (!TowerManager.Instance.HasSelection) return;
+
             var ray = Camera.main!.ScreenPointToRay(InputManager.MousePosition);
             if (!Physics.Raycast(ray, out var hit)) return;
             if (!hit.collider.GetComponent<GridBehaviour>()) return;
@@ -67,7 +69,7 @@ namespace World
             var cell = GetCell(gridPosition.x, gridPosition.y);
 
             // Ensures that we're only placing towers when we have a selection.
-            if (TowerManager.Instance.HasSelection && !cell.IsOccupied)
+            if (!cell.IsOccupied)
                 TowerManager.Instance.PlaceTower(cell);
 
             Debug.Log($"<color=yellow>Cell:{cell.X}, {cell.Z}, Top Center:{cell.TopCenter}, Base:{cell.OccupyingTower.name}</color>");
@@ -141,11 +143,14 @@ namespace World
             return waypoints;
         }
 
-        public List<Cell> GetCellsInRowRange(int startX, int startZ, int range)
+        public List<Cell> GetCellsInRowRange(int startX, int startZ, int range, bool bothSides = false)
         {
             var cells = new List<Cell>();
             
-            for (var x = startX - range; x <= startX + range; x++)
+            var start = bothSides ? startX - range : startX;
+            var end = startX + range;
+            
+            for (var x = start; x <= end; x++)
             {
                 var cell = GetCell(x, startZ);
                 if (cell != null) cells.Add(cell);
@@ -153,12 +158,18 @@ namespace World
 
             return cells;
         }
-        
-        public List<Cell> GetCellsInColumnRange(int startX, int startZ, int range)
+
+        public List<Cell> GetCellsInRowRange(Vector2Int start, int range, bool bothSides = false)
+            => GetCellsInRowRange(start.x, start.y, range, bothSides);
+
+        public List<Cell> GetCellsInColumnRange(int startX, int startZ, int range, bool bothSides = false)
         {
             var cells = new List<Cell>();
             
-            for (var z = startZ - range; z <= startZ + range; z++)
+            var start = bothSides ? startZ - range : startZ;
+            var end = startZ + range;
+            
+            for (var z = start; z <= end; z++)
             {
                 var cell = GetCell(startX, z);
                 if (cell != null) cells.Add(cell);
@@ -166,7 +177,10 @@ namespace World
 
             return cells;
         }
-        
+
+        public List<Cell> GetCellsInColumnRange(Vector2Int start, int range, bool bothSides = false)
+            => GetCellsInColumnRange(start.x, start.y, range, bothSides);
+
         public void AddTowerInCell(int x, int z, BaseTower tower)
         {
             var cell = GetCell(x, z);

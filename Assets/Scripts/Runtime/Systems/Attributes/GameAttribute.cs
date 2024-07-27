@@ -8,5 +8,6 @@ namespace Systems.Attributes
         MaxHealth,
         Damage,
         Speed,
+        AttackRange,
     }
 }

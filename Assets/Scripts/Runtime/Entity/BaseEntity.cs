@@ -32,7 +32,7 @@ namespace Entity
 
             ApplyBaseAttributes();
         }
-        
+
         protected virtual void ApplyBaseAttributes()
         {
             Debug.Log("Applying base attributes.");
@@ -44,6 +44,15 @@ namespace Entity
 
             if (CurrentHealth <= 0)
                 Destroy(gameObject);
+        }
+
+        /// <summary>
+        /// Attack logic for the entity.
+        /// This method can be used for Animation Events.
+        /// </summary>
+        public virtual void Attack()
+        {
+            Debug.Log("Entity is attacking.");
         }
     }
 }

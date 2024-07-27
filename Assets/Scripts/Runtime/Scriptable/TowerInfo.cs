@@ -12,6 +12,7 @@ namespace Scriptable
 
             public int health;
             public int damage;
+            public int attackRange;
         }
     }
 }

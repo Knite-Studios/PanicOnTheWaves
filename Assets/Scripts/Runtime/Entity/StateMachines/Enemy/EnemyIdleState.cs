@@ -9,11 +9,13 @@
         public override void EnterState()
         {
             // Animation logic here.
+            // Enemy.Anim.SetBool();
         }
 
         public override void ExitState()
         {
             // Animation logic here.
+            // Enemy.Anim.SetBool();
         }
     }
 }

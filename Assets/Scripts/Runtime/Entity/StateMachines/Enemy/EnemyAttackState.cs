@@ -1,11 +1,7 @@
-﻿using Entity.Towers;
-
-namespace Entity.StateMachines.Enemy
+﻿namespace Entity.StateMachines.Enemy
 {
     public class EnemyAttackState : EnemyBaseState
     {
-        private BaseTower _targetTower;
-
         public EnemyAttackState(string name, BaseEntity owner) : base(name, owner)
         {
         }
@@ -13,23 +9,20 @@ namespace Entity.StateMachines.Enemy
         public override void EnterState()
         {
             // Animation logic here.
-            
-            // Get the tower in the current cell.
-            var gridPosition = Enemy.Grid.GetGridPosition(Enemy.transform.position);
-            var currentCell = Enemy.Grid.GetCell(gridPosition);
-            _targetTower = currentCell?.OccupyingTower;
+            // Enemy.Anim.SetTrigger();
         }
         
         public override void UpdateState()
         {
             base.UpdateState();
             
-            if (_targetTower) _targetTower.TakeDamage(Enemy.Damage);
+            Enemy.Attack();
         }
 
         public override void ExitState()
         {
             // Animation logic here.
+            // Enemy.Anim.ResetTrigger();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Common.Attributes;
 using Entity.StateMachines;
 using Entity.StateMachines.Enemy;
+using NaughtyAttributes;
 using Scriptable;
 using Systems.Attributes;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Entity.Enemies
     public class BaseEnemy : BaseEntity
     {
         [TitleHeader("Base Enemy Settings")]
-        [SerializeField] private EnemyInfo info;
+        [SerializeField, Required] private EnemyInfo info;
         [Tooltip("The delay before the enemy performs an action.")]
         public float actionDelay = 1.0f;
 
@@ -24,6 +25,12 @@ namespace Entity.Enemies
         #endregion
 
         private BaseState<BaseEntity> _currentState;
+
+        #region Attribute Getters
+        
+        public float Speed => this.GetAttributeValue<float>(GameAttribute.Speed);
+        
+        #endregion
 
         public BaseState<BaseEntity> State => _currentState;
         public List<Vector3> PathWaypoints { get; private set; }
@@ -74,6 +81,14 @@ namespace Entity.Enemies
         {
             path.Reverse();
             PathWaypoints = path;
+        }
+
+        public override void Attack()
+        {
+            var gridPosition = Grid.GetGridPosition(transform.position);
+            var currentCell = Grid.GetCell(gridPosition);
+            var targetTower = currentCell?.OccupyingTower;
+            targetTower?.TakeDamage(Damage);
         }
     }
 }

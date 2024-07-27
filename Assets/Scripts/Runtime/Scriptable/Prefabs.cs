@@ -42,4 +42,5 @@ public enum PrefabType
     RushEnemy = 6,
     SneakyGhost = 7,
     TankEnemy = 8,
+    Projectile = 9,
 }

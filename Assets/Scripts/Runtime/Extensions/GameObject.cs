@@ -35,6 +35,11 @@ namespace Extensions
             where T : Component
             => gameObject.GetComponent<T>();
 
+        /// <summary>
+        /// Checks if the game object is the player.
+        /// </summary>
+        public static bool IsPlayer(this GameObject gameObject)
+            => gameObject.CompareLayer("Player") || gameObject.CompareTag("Player");
 
         /// <summary>
         /// Checks if the colliding object is the player.
@@ -47,7 +52,17 @@ namespace Extensions
         /// </summary>
         public static bool IsPlayer(this Collision2D other)
             => other.gameObject.CompareLayer("Player") || other.gameObject.CompareTag("Player");
-        
-        
+
+        /// <summary>
+        /// Checks if the colliding object is the player.
+        /// </summary>
+        public static bool IsPlayer(this Collider other)
+            => other.gameObject.CompareLayer("Player") || other.gameObject.CompareTag("Player");
+
+        /// <summary>
+        /// Checks if the colliding object is the player.
+        /// </summary>
+        public static bool IsPlayer(this Collision other)
+            => other.gameObject.CompareLayer("Player") || other.gameObject.CompareTag("Player");
     }
 }

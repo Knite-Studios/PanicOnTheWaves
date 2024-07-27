@@ -14,6 +14,7 @@ namespace Entity.StateMachines.Enemy
         public override void EnterState()
         {
             // Animation logic here.
+            // Enemy.Anim.SetBool();
         }
         
         public override void FixedUpdateState()
@@ -24,6 +25,7 @@ namespace Entity.StateMachines.Enemy
         public override void ExitState()
         {
             // Animation logic here.
+            // Enemy.Anim.SetBool();
         }
 
         private void MoveToPath()
@@ -39,8 +41,7 @@ namespace Entity.StateMachines.Enemy
             
             var targetPosition = Enemy.PathWaypoints[_currentWaypointIndex];
             var direction = (targetPosition - Enemy.transform.position).normalized;
-            Enemy.Rb.MovePosition(Enemy.transform.position + direction * 
-                (Enemy.GetAttributeValue<float>(GameAttribute.Speed) * Time.fixedDeltaTime));
+            Enemy.Rb.MovePosition(Enemy.transform.position + direction * (Enemy.Speed * Time.fixedDeltaTime));
 
             if (Vector3.Distance(Enemy.transform.position, targetPosition) < 0.1f)
                 _currentWaypointIndex++;

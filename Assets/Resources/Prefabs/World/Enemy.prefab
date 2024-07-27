@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3415637011227435097}
   - component: {fileID: 4466939554669179476}
   - component: {fileID: 3815429519658348417}
-  - component: {fileID: 3739845156891667809}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3739845156891667809
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931204396596065051}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4151870631273612344
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +95,7 @@ GameObject:
   - component: {fileID: 4768109008566402776}
   - component: {fileID: 6581733232402286599}
   - component: {fileID: 1716689545369923349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c686361a94046538dfe069cdf05a49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentHealth>k__BackingField: 0
   info: {fileID: 11400000, guid: f7c49b47042bfd246b3ec10e81ee64ff, type: 2}
   actionDelay: 1
 --- !u!54 &1716689545369923349
@@ -195,14 +174,14 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1001 &5716670868203995611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -258,6 +237,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
       propertyPath: m_Name
       value: BodyBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

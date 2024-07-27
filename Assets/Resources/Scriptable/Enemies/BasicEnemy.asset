@@ -17,4 +17,4 @@ MonoBehaviour:
   weight: 0
   health: 200
   damage: 8
-  speed: 5
+  speed: 2
