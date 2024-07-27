@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using Common.Attributes;
+using Entity;
 using Interfaces;
 using Managers;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace World.Projectiles
     {
         [SerializeField] protected float speed = 10.0f;
         [SerializeField] protected float lifetime = 5.0f;
-        [SerializeField] protected PrefabType prefabType;
+        [SerializeField, RequiredEnum(0)] protected PrefabType prefabType;
 
         private int _damage;
         private BaseEntity _owner;

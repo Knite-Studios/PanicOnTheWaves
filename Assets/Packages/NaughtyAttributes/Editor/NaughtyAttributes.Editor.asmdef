@@ -1,9 +1,11 @@
 {
     "name": "NaughtyAttributes.Editor",
+    "rootNamespace": "",
     "references": [
-        "NaughtyAttributes.Core"
+        "NaughtyAttributes.Core",
+        "POTW.Runtime",
+        "POTW.Editor"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -12,5 +14,7 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

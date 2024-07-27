@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Attributes;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -19,6 +20,7 @@ namespace NaughtyAttributes.Editor
             _validatorsByAttributeType[typeof(MinValueAttribute)] = new MinValuePropertyValidator();
             _validatorsByAttributeType[typeof(MaxValueAttribute)] = new MaxValuePropertyValidator();
             _validatorsByAttributeType[typeof(RequiredAttribute)] = new RequiredPropertyValidator();
+            _validatorsByAttributeType[typeof(RequiredEnumAttribute)] = new RequiredEnumPropertyValidator();
             _validatorsByAttributeType[typeof(ValidateInputAttribute)] = new ValidateInputPropertyValidator();
         }
 
