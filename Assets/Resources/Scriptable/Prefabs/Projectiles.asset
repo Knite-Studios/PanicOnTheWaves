@@ -15,6 +15,6 @@ MonoBehaviour:
   prefabs:
   - type: 9
     prefab: {fileID: 8864387082608770930, guid: 5d7adba3a8149a24ab2ecc0c73b81d9d, type: 3}
-    root: 
+    root: '- Object Pool'
     shouldPool: 0
     initialPoolSize: 10
