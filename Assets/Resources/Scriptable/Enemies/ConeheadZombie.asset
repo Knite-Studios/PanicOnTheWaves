@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ConeheadZombie
   m_EditorClassIdentifier: 
   prefab: 5
+  cost: 10
+  weight: 10
   health: 320
   damage: 12
-  speed: 10
+  speed: 2
+  actionDelay: 5

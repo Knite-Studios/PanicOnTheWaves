@@ -1,13 +1,19 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 using Common.Attributes;
 using Common.Utils;
+using NaughtyAttributes;
+using Scriptable;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Managers
 {
     public class GameManager : MonoSingleton<GameManager>
     {
+        public static UnityAction<List<EnemyInfo>> OnWaveStart;
+
         protected override void Awake()
         {
             base.Awake();
@@ -36,6 +42,13 @@ namespace Managers
             {
                 method?.Invoke(null, null);
             }
+        }
+        
+        [Button]
+        public void StartWave()
+        {
+            var wave = WaveManager.Instance.GetNextWave();
+            OnWaveStart?.Invoke(wave);
         }
     }
 }

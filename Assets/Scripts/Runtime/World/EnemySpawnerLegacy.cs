@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Entity.Enemies;
 using Managers;
 using NaughtyAttributes;
@@ -10,22 +9,31 @@ using Random = UnityEngine.Random;
 namespace World
 {
     [DefaultExecutionOrder(200)]
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawnerLegacy : MonoBehaviour
     {
         [SerializeField] private GridBehaviour grid;
+        [SerializeField] private List<EnemyInfo> enemies = new();
+        [SerializeField] private bool randomSpawn;
+        [SerializeField] private float spawnInterval = 3.0f;
 
         private List<Transform> _spawnPoints = new();
+        private float _timer;
 
         private void Start()
         {
             SetupSpawnPoints();
         }
 
-        private void OnEnable()
-            => GameManager.OnWaveStart += HandleWaveStart;
-        
-        private void OnDisable()
-            => GameManager.OnWaveStart -= HandleWaveStart;
+        private void Update()
+        {
+            if (!randomSpawn) return;
+
+            _timer += Time.deltaTime;
+            if (!(_timer >= spawnInterval)) return;
+
+            SpawnRandomEnemy();
+            _timer = 0;
+        }
 
         private void SetupSpawnPoints()
         {
@@ -41,15 +49,7 @@ namespace World
             }
         }
 
-        private void HandleWaveStart(List<EnemyInfo> wave)
-        {
-            foreach (var enemy in wave)
-            {
-                SpawnEnemy(enemy, Random.Range(0, _spawnPoints.Count));
-            }
-        }
-
-        private void SpawnEnemy(EnemyInfo enemyInfo, int rowIndex)
+        public void SpawnEnemy(EnemyInfo enemyInfo, int rowIndex)
         {
             if (rowIndex < 0 || rowIndex >= _spawnPoints.Count) return;
 
@@ -59,9 +59,8 @@ namespace World
         }
 
         [Button]
-        public void SpawnRandomEnemy()
+        private void SpawnRandomEnemy()
         {
-            var enemies = WaveManager.Instance.enemies;
             if (enemies.Count == 0) return;
 
             var randomEnemy = enemies[Random.Range(0, enemies.Count)];

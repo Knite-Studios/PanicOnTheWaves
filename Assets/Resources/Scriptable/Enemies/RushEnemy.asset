@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: RushEnemy
   m_EditorClassIdentifier: 
   prefab: 6
+  cost: 10
+  weight: 10
   health: 270
   damage: 25
-  speed: 30
+  speed: 2
+  actionDelay: 5

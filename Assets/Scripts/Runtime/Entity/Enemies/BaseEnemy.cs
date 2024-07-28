@@ -13,8 +13,6 @@ namespace Entity.Enemies
     {
         [TitleHeader("Base Enemy Settings")]
         [SerializeField, Required] private EnemyInfo info;
-        [Tooltip("The delay before the enemy performs an action.")]
-        public float actionDelay = 1.0f;
 
         #region Statemachine References
         
@@ -29,6 +27,7 @@ namespace Entity.Enemies
         #region Attribute Getters
         
         public float Speed => this.GetAttributeValue<float>(GameAttribute.Speed);
+        public float ActionDelay => this.GetAttributeValue<float>(GameAttribute.ActionDelay);
         
         #endregion
 
@@ -66,6 +65,7 @@ namespace Entity.Enemies
             this.GetOrCreateAttribute(GameAttribute.MaxHealth, info.health);
             this.GetOrCreateAttribute(GameAttribute.Damage, info.damage);
             this.GetOrCreateAttribute(GameAttribute.Speed, info.speed);
+            this.GetOrCreateAttribute(GameAttribute.ActionDelay, info.actionDelay);
 
             CurrentHealth = MaxHealth;
         }

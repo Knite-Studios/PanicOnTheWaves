@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SneakyGhost
   m_EditorClassIdentifier: 
   prefab: 7
+  cost: 10
+  weight: 10
   health: 120
   damage: 0
-  speed: 20
+  speed: 2
+  actionDelay: 5

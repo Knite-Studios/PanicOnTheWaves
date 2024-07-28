@@ -16,4 +16,4 @@ MonoBehaviour:
   cost: 10
   health: 50
   damage: 100
-  attackRange: 6
+  attackRange: 12

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
   prefab: 4
-  cost: 0
-  weight: 0
+  cost: 10
+  weight: 10
   health: 200
   damage: 8
   speed: 2
+  actionDelay: 5

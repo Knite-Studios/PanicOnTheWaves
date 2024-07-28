@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: TankEnemy
   m_EditorClassIdentifier: 
   prefab: 8
+  cost: 10
+  weight: 10
   health: 460
   damage: 16
-  speed: 10
+  speed: 1
+  actionDelay: 8

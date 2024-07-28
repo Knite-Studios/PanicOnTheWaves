@@ -13,7 +13,7 @@ namespace Entity.StateMachines.Enemy
         public EnemyBaseState(string name, BaseEntity owner) : base(name, owner)
         {
             Enemy = owner as BaseEnemy;
-            _actionTimer = Enemy!.actionDelay;
+            _actionTimer = Enemy!.ActionDelay;
         }
 
         public override void UpdateState()

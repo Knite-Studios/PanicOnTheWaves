@@ -1048,10 +1048,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 996064564}
-  enemies:
-  - {fileID: 11400000, guid: f7c49b47042bfd246b3ec10e81ee64ff, type: 2}
-  randomSpawn: 0
-  spawnInterval: 3
 --- !u!1 &298402236
 GameObject:
   m_ObjectHideFlags: 0
