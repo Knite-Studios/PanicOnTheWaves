@@ -10,22 +10,23 @@ namespace Managers
 {
     public class TowerManager : MonoSingleton<TowerManager>
     {
+        public static UnityAction<int> OnHypeChange;
+        public static UnityAction OnTowerPlaced;
+
         // TODO: Replace this later when we have a currency system.
         [SerializeField] private int initialHype = 100;
-
-        public UnityEvent<int> onHypeChange;
-        
-        public bool HasSelection => _isPlacingTower;
 
         private int _currentHype;
         private TowerInfo _selectedTower;
         private bool _isPlacingTower;
         private GridBehaviour _grid;
 
+        public bool HasSelection => _isPlacingTower;
+
         private void Start()
         {
             _currentHype = initialHype;
-            onHypeChange?.Invoke(_currentHype);
+            OnHypeChange?.Invoke(_currentHype);
             _grid = FindObjectOfType<GridBehaviour>();
         }
 
@@ -64,7 +65,8 @@ namespace Managers
             _grid.AddTowerInCell(cell.X, cell.Z, tower);
 
             _currentHype -= _selectedTower.cost;
-            onHypeChange?.Invoke(_currentHype);
+            OnHypeChange?.Invoke(_currentHype);
+            OnTowerPlaced?.Invoke();
             
             _isPlacingTower = false;
             _selectedTower = null;

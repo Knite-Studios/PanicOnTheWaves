@@ -1,12 +1,10 @@
 ﻿using Common;
-using Common.Attributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Managers
 {
-    [InitializeSingleton]
     public class InputManager : MonoSingleton<InputManager>
     {
         public static Vector2 MousePosition => Mouse.current.position.ReadValue();

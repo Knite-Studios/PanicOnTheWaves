@@ -14,7 +14,7 @@ namespace World
     {
         [SerializeField] private GridBehaviour grid;
 
-        private List<Transform> _spawnPoints = new();
+        private readonly List<Transform> _spawnPoints = new();
 
         private void Start()
         {
@@ -22,10 +22,10 @@ namespace World
         }
 
         private void OnEnable()
-            => GameManager.OnWaveStart += HandleWaveStart;
+            => GameManager.OnWaveStart += OnWaveStartEvent;
         
         private void OnDisable()
-            => GameManager.OnWaveStart -= HandleWaveStart;
+            => GameManager.OnWaveStart -= OnWaveStartEvent;
 
         private void SetupSpawnPoints()
         {
@@ -41,7 +41,7 @@ namespace World
             }
         }
 
-        private void HandleWaveStart(List<EnemyInfo> wave)
+        private void OnWaveStartEvent(List<EnemyInfo> wave)
         {
             foreach (var enemy in wave)
             {
