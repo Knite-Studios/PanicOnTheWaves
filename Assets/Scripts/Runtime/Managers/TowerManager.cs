@@ -56,7 +56,7 @@ namespace Managers
         public void PlaceTower(GridBehaviour.Cell cell)
         {
             if (!_isPlacingTower || _selectedTower == null) return;
-            if (_currentHype < _selectedTower.cost) return;
+            if (_currentHype < _selectedTower.cost || _currentHype <= 0) return;
             if (cell.IsOccupied) return;
 
             if (!_grid) _grid = FindObjectOfType<GridBehaviour>();
