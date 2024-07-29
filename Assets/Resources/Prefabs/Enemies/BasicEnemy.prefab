@@ -154,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CurrentHealth>k__BackingField: 0
   info: {fileID: 11400000, guid: 5300376c6ece96a4eb5c042d32bf6043, type: 2}
-  actionDelay: 1
 --- !u!54 &1716689545369923349
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -204,19 +203,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -224,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5d4bf33b0b58fc4fb4989f1a2ee4112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

@@ -41,12 +41,7 @@ namespace Entity.StateMachines.Enemy
             
             var targetPosition = Enemy.PathWaypoints[_currentWaypointIndex];
             var direction = (targetPosition - Enemy.transform.position).normalized;
-            
-            // Rotate towards the target direction.
-            // TODO: Implement a better rotation system later probably.
-            var targetRotation = Quaternion.Euler(0, 180, 0); 
-            Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
-            
+
             // Move towards the target position.
             Enemy.Rb.MovePosition(Enemy.transform.position + direction * (Enemy.Speed * Time.fixedDeltaTime));
 
