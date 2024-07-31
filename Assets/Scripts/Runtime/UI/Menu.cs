@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace UI
 {
@@ -16,13 +17,16 @@ namespace UI
         
         private GameObject _lastSelected;
         
-        protected virtual void Update()
-        {
-            HandleInput();
-        }
+        /// <summary>
+        /// Checks if the menu is open.
+        /// </summary>
+        public bool IsOpen => MenuManager.Instance.IsMenuOpen(this);
 
         protected virtual void OnEnable()
         {
+            // Subscribe to the menu input.
+            InputManager.Menu.started += OnMenuInput;
+
             // Keep track of the last selected game object.
             _lastSelected = EventSystem.current.currentSelectedGameObject;
             // Set the first selected game object if it's not null.
@@ -31,43 +35,35 @@ namespace UI
 
         protected virtual void OnDisable()
         {
+            // Unsubscribe from the menu input.
+            InputManager.Menu.started -= OnMenuInput;
+
             // Set the last selected game object if it's not null.
             if (_lastSelected != null) EventSystem.current.SetSelectedGameObject(_lastSelected);
             // Clear the last selected game object.
             _lastSelected = null;
         }
 
-        /// <summary>
-        /// Checks if the menu is open.
-        /// </summary>
-        public bool IsOpen => MenuManager.Instance.IsMenuOpen(this);
+        public void Enable() => gameObject.SetActive(true);
         
-        public void Open() => gameObject.SetActive(true);
-        
-        public void Close() => gameObject.SetActive(false);
+        public void Disable() => gameObject.SetActive(false);
         
         /// <summary>
         /// Requests the MenuManager to open the menu.
         /// </summary>
         public void OpenMenu() => MenuManager.Instance.OpenMenu(this);
-    
+        
         /// <summary>
         /// Requests the MenuManager to close the menu.
         /// </summary>
         public void CloseMenu() => MenuManager.Instance.CloseMenu();
-    
+        
         /// <summary>
-        /// Defines the action to be taken when the back button is pressed.
+        /// Requests the MenuManager to close the menu and open another menu.
         /// </summary>
-        public virtual void OnBackPressed() => CloseMenu();
-    
-        /// <summary>
-        /// Handles input specific to the menu.
-        /// </summary>
-        private void HandleInput()
+        private void OnMenuInput(InputAction.CallbackContext context)
         {
-            if (InputManager.Menu.WasReleasedThisFrame() && IsOpen)
-                OnBackPressed();
+            if (IsOpen) CloseMenu();
         }
     }
 }

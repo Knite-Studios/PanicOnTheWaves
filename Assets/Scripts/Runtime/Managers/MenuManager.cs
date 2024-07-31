@@ -29,7 +29,7 @@ namespace Managers
         /// <param name="menu">The menu.</param>
         /// <returns>true or false.</returns>
         public bool IsMenuOpen(Menu menu) => IsAnyMenuOpen() && _menuStack.Peek() == menu;
-    
+        
         /// <summary>
         /// Opens a specific menu and closes the previous menu.
         /// </summary>
@@ -43,14 +43,14 @@ namespace Managers
             
             // Close all instances of the menu.
             while (_menuStack.Contains(menu))
-                _menuStack.Pop().Close();
+                _menuStack.Pop().Disable();
             
             // Close the previous menu.
             if (_menuStack.Count > 0)
-                _menuStack.Peek().Close();
-        
+                _menuStack.Peek().Disable();
+            
             // Open the menu.
-            menu.Open();
+            menu.Enable();
             
             // Set the first selected object.
             EventSystem.current.SetSelectedGameObject(menu.firstSelected);
@@ -65,15 +65,15 @@ namespace Managers
         public void CloseMenu()
         {
             if (_menuStack.Count == 0) return;
-        
+            
             // Close the top menu.
             var topMenu = _menuStack.Pop();
-            topMenu.Close();
+            topMenu.Disable();
             
             // Open the previous menu.
             if (_menuStack.Count > 0)
             {
-                _menuStack.Peek().Open();
+                _menuStack.Peek().Enable();
                 // Set the first selected object.
                 EventSystem.current.SetSelectedGameObject(_menuStack.Peek().firstSelected);
             }

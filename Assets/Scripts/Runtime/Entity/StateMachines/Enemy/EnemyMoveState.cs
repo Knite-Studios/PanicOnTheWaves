@@ -1,5 +1,4 @@
-﻿using Systems.Attributes;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Entity.StateMachines.Enemy
 {
