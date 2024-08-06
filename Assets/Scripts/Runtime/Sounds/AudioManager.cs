@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         PlayMusic("MainMenuTheme");
-        PlaySFX("Test");
+        //PlaySFX("Test");
     }
     public void PlayMusic(string name)
     {
